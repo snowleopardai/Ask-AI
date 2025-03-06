@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask AI - Snow Leopard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, button { padding: 10px; margin: 10px; }
+        #response { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Ask Snow Leopard AI</h1>
+    <input type="text" id="question" placeholder="Ask me anything..." size="50">
+    <button onclick="askAI()">Ask</button>
+    <p id="response"></p>
+
+    <script>
+        async function askAI() {
+            const question = document.getElementById("question").value;
+            const responseElement = document.getElementById("response");
+
+            if (!question.trim()) {
+                responseElement.innerText = "Please enter a question.";
+                return;
+            }
+
+            responseElement.innerText = "Thinking... ⏳";
+
+            try {
+                const res = await fetch("https://your-api-url.com/ask-ai", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question })
+                });
+                const data = await res.json();
+                responseElement.innerText = data.response || "No response received.";
+            } catch (error) {
+                responseElement.innerText = "Error connecting to AI.";
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
