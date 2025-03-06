@@ -29,7 +29,7 @@
             responseElement.innerText = "Thinking... ⏳";
 
             try {
-                const res = await fetch("https://your-api-url.com/ask-ai", {
+                const res = await fetch("https://snowleopard-91c1a460d5be.herokuapp.com/ask-ai", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ question })
