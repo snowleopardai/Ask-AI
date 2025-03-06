@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask AI - Snow Leopard</title>
+    <title>Ask Mark. Your friendly AI robot</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
         input, button { padding: 10px; margin: 10px; }
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h1>Ask Snow Leopard AI</h1>
+    <h1>Ask Mark. Your friendly AI robot.</h1>
     <input type="text" id="question" placeholder="Ask me anything..." size="50">
     <button onclick="askAI()">Ask</button>
     <p id="response"></p>
@@ -34,11 +34,20 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ question })
                 });
+
+                // Check if the response is OK
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+
                 const data = await res.json();
-                responseElement.innerText = data.response || "No response received.";
+                
+                // ✅ Fix: Access the correct property
+                responseElement.innerText = data.data || "No response received.";
+
             } catch (error) {
                 responseElement.innerText = "Error connecting to AI.";
-                console.error(error);
+                console.error("❌ Fetch Error:", error);
             }
         }
     </script>
